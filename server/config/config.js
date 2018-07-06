@@ -39,12 +39,20 @@ let urlDB;
 if (process.env.NODE_ENV === 'dev') {
     urlDB = 'mongodb://localhost:27017/iCanyon'
 } else {
-    urlDB = process.env.MONGO_URI;
+    urlDB = 'mongodb://icanyon-user:1a2b3c@ds221631.mlab.com:21631/icanyon'; //  process.env.MONGO_URI; ..borrar valor urlDB anterior
 }
 process.env.URLDB = urlDB;
+
 
 //=====================
 //Google Client ID
 //=====================
 
-process.env.CLIENT_ID = process.env.CLIENT_ID || '344020380409-e197t81gcjoge559m64o1iga9j9ddqih.apps.googleusercontent.com';
+process.env.CLIENT_ID = process.env.CLIENT_ID || '905424495770-jpo7j17pb85oj4q279i5700ne7pqiops.apps.googleusercontent.com';
+
+
+//=====================
+//Geocoder 
+//=====================
+
+process.env.GOOGLE_API_KEY = process.env.GOOGLE_API_KEY || 'AIzaSyClim-DtBlKfsXQudkkdGH7pz3LG39LXDc'

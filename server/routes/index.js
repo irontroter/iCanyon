@@ -10,6 +10,8 @@ app.use(require('./producto'));
 app.use(require('./upload'));
 app.use(require('./imagenes'));
 
+app.use(require('./canyon'));
+
 module.exports = (
     app
 )

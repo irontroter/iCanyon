@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Google Sign-in Demo</title>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="344020380409-e197t81gcjoge559m64o1iga9j9ddqih.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="905424495770-jpo7j17pb85oj4q279i5700ne7pqiops.apps.googleusercontent.com">
 </head>
 
 <body>
@@ -40,7 +40,7 @@
 
 
             var id_token = googleUser.getAuthResponse().id_token;
-            console.log(id_token);
+            // console.log(id_token);
 
             var xhr = new XMLHttpRequest();
             xhr.open('POST', '/google');

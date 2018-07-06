@@ -82,6 +82,7 @@ async function verify(token) {
 app.post('/google', async(req, res) => {
 
     let token = req.body.idtoken;
+
     let googleUser = await verify(token)
         .catch(e => {
             return res.status(403).json({
@@ -121,6 +122,7 @@ app.post('/google', async(req, res) => {
 
             }
         } else {
+            // Si usuario no existe en la BD
             let usuario = new Usuario();
 
             usuario.nombre = googleUser.nombre;
@@ -146,20 +148,16 @@ app.post('/google', async(req, res) => {
                     ok: true,
                     usuario: usuarioDB,
                     token
-                })
+                });
 
 
-            })
+            });
 
 
         }
 
 
     });
-
-    // res.json({
-    //     usuario: googleUser
-    // });
 
 });
 

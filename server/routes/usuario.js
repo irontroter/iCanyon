@@ -9,20 +9,11 @@ const _ = require('underscore');
 
 app.get('/usuario', verificaToken, (req, res) => {
 
-    // return res.json({
-
-    //     // usuario: req.usuario,
-    //     nombre: req.usuario.nombre,
-    //     email: req.usuario.email
-
-    // })
-
     let desde = req.query.desde || 0;
     desde = Number(desde);
 
     let limite = req.query.limite || 5;
     limite = Number(limite);
-
 
     Usuario.find({ estado: true }, 'nombre email role estado google img')
         .skip(desde)
@@ -43,16 +34,11 @@ app.get('/usuario', verificaToken, (req, res) => {
                     usuarios,
                     cuantos: conteo
                 });
-
             });
-
         });
-
-
 });
 
 app.post('/usuario', [verificaToken, verificaAdmin_Role], function(req, res) {
-
 
     let body = req.body;
 
@@ -76,12 +62,12 @@ app.post('/usuario', [verificaToken, verificaAdmin_Role], function(req, res) {
             usuario: usuarioDB
         })
     });
-
 });
 
 app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, res) {
 
     let id = req.params.id;
+    let idSesion = req.usuario._id;
 
     let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
 
@@ -100,10 +86,38 @@ app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, res) 
             usuario: usuarioDB
         });
     })
-
-
-
 });
+
+app.put('/usuario/perfil/:id', [verificaToken], function(req, res) {
+
+    let id = req.params.id;
+    let idSesion = req.usuario._id;
+
+    if (id !== idSesion) {
+        return res.status(500).json({
+            ok: false,
+            err: {
+                message: 'No estas con la sesion del perfil'
+            }
+        });
+    }
+    let body = _.pick(req.body, ['nombre', 'email', 'img']);
+
+    Usuario.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, usuarioDB) => {
+
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        }
+        res.json({
+            ok: true,
+            usuario: usuarioDB
+        });
+    })
+});
+
 
 app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, res) {
 
@@ -114,11 +128,7 @@ app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, re
     let cambiaEstado = {
         estado: false
     }
-
-
     Usuario.findByIdAndUpdate(id, cambiaEstado, { new: true }, (err, usuarioBorrado) => {
-
-
 
         if (err) {
             return res.status(400).json({
@@ -140,9 +150,7 @@ app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, re
             ok: true,
             usuario: usuarioBorrado
         });
-
     });
-
 });
 
 module.exports = (
