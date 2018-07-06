@@ -39,7 +39,7 @@ let urlDB;
 if (process.env.NODE_ENV === 'dev') {
     urlDB = 'mongodb://localhost:27017/iCanyon'
 } else {
-    urlDB = 'mongodb://icanyon-user:1a2b3c@ds221631.mlab.com:21631/icanyon'; //  process.env.MONGO_URI; ..borrar valor urlDB anterior
+    urlDB = process.env.MONGO_URI;
 }
 process.env.URLDB = urlDB;
 
