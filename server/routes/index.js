@@ -11,6 +11,8 @@ app.use(require('./upload'));
 app.use(require('./imagenes'));
 
 app.use(require('./canyon'));
+app.use(require('./valorarCanyon'));
+app.use(require('./valorarDescripcionCanyon'));
 
 module.exports = (
     app
