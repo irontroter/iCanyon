@@ -39,7 +39,11 @@ let usuarioSchema = new Schema({
     google: {
         type: Boolean,
         default: false
-    }
+    },
+    canyonsFavoritos: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Favorito'
+    }]
 });
 
 // password undefined a routes també serviria
