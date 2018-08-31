@@ -185,7 +185,7 @@ app.get('/informes', verificaToken, (req, res) => {
                 return res.status(400).json({
                     ok: false,
                     err: {
-                        message: "No hay fotos"
+                        message: "No hay informes"
                     }
                 });
             };

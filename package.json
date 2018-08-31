@@ -12,6 +12,7 @@
     "dependencies": {
         "bcrypt": "^2.0.1",
         "body-parser": "^1.18.3",
+        "co": "^4.6.0",
         "express": "^4.16.3",
         "express-fileupload": "^0.4.0",
         "find": "^0.2.9",

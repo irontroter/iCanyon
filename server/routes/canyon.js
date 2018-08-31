@@ -139,7 +139,13 @@ app.post('/canyon', [verificaToken], function(req, res) {
             loc: [body.lat, body.lng],
             provincia: geo[0].administrativeLevels.level2long,
             region: geo[0].administrativeLevels.level1long,
-            pais: geo[0].country
+            pais: geo[0].country,
+            cascadaMax: body.cascadaMax,
+            clasificacion: {
+                vertical: body.vertical,
+                agua: body.agua,
+                envergadura: body.envergadura
+            }
         });
 
         canyon.save((err, canyonDB) => {
